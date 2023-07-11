@@ -24,8 +24,11 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: install depencicies
-      run: mvn install 
+    - name: remove dependencies
+      run: mvn clean install 
+    
+    - name: install dependencies
+      run: mvn  install 
 
     - name: build
-      run: mvn build
+      run: mvn install
