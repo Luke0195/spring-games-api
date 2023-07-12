@@ -1,13 +1,12 @@
 package br.com.dsgames.controllers;
 
 import br.com.dsgames.dtos.GameDTO;
+import br.com.dsgames.dtos.GameListDTO;
 import br.com.dsgames.services.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,10 +16,16 @@ public class GameResource {
     @Autowired
     private GameService service;
     @GetMapping
-    public ResponseEntity<List<GameDTO>> findAll(){
+    public ResponseEntity<List<GameListDTO>> findAll(){
 
-        List<GameDTO> dto = service.findAllGames();
+        List<GameListDTO> dto = service.findAllGames();
         return ResponseEntity.ok().body(dto);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<GameDTO> findById(@PathVariable Long id){
+        GameDTO dto = service.findById(id);
+        return ResponseEntity.ok(dto);
     }
 
 }
