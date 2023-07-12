@@ -1,6 +1,9 @@
 package br.com.dsgames.dtos;
 
 import br.com.dsgames.entities.Game;
+import br.com.dsgames.projections.GameListProjection;
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -31,6 +34,16 @@ public class GameListDTO implements Serializable {
         this.shortDescription = entity.getShortDescription();
         this.imgUrl = entity.getImgUrl();
     }
+
+    public GameListDTO(GameListProjection entity){
+        // O bean é uma forma de gerenciar o a copia de muita propriedades sem ter que ficar repassando cada um dos métodos
+        this.id = entity.getId();
+        this.year = entity.getYear();
+        this.title = entity.getTitle();
+        this.imgUrl = entity.getImgUrl();
+        this.shortDescription = entity.getShortDescription();
+    }
+
 
     public Long getId() {
         return id;

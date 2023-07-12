@@ -4,7 +4,10 @@ import java.util.Optional;
 
 import br.com.dsgames.dtos.GameDTO;
 import br.com.dsgames.dtos.GameListDTO;
+import br.com.dsgames.dtos.ListGameDTO;
 import br.com.dsgames.entities.Game;
+import br.com.dsgames.entities.GameList;
+import br.com.dsgames.projections.GameListProjection;
 import br.com.dsgames.repositories.GameRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +32,14 @@ public class GameService {
         Game game = entity.get();
         return new GameDTO(game);
     }
+
+    @Transactional(readOnly = true)
+    public List<GameListDTO> findByList(Long id){
+        List<GameListProjection> result = repository.searchByList(id);
+        System.out.println(result);
+        return result.stream().map(GameListDTO::new).toList();
+    }
+
 
 
 }

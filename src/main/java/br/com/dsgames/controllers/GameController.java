@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/games")
-public class GameResource {
+public class GameController {
     @Autowired
     private GameService service;
     @GetMapping
