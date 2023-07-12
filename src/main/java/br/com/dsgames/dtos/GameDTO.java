@@ -1,8 +1,12 @@
 package br.com.dsgames.dtos;
 
 import br.com.dsgames.entities.Game;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.zaxxer.hikari.util.UtilityElf;
 import jakarta.persistence.Column;
+import org.springframework.beans.BeanUtils;
+
+import java.beans.Beans;
 
 public class GameDTO {
     private Long id;
@@ -31,16 +35,9 @@ public class GameDTO {
         this.longDescription = longDescription;
     }
 
-    public GameDTO(Game game){
-        this.id =game.getId();
-        this.title = game.getTitle();
-        this.year = game.getYear();
-        this.genre = game.getGenre();
-        this.platforms = game.getPlatforms();
-        this.score = game.getScore();
-        this.imgUrl = game.getImgUrl();
-        this.shortDescription = game.getShortDescription();
-        this.longDescription = game.getLongDescription();
+    public GameDTO(Game entity){
+        // O bean é uma forma de gerenciar o a copia de muita propriedades sem ter que ficar repassando cada um dos métodos
+        BeanUtils.copyProperties(entity, this);
     }
 
     public Long getId() {
