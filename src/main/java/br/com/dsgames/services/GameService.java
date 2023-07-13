@@ -3,11 +3,9 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.dsgames.dtos.GameDTO;
-import br.com.dsgames.dtos.GameListDTO;
-import br.com.dsgames.dtos.ListGameDTO;
+import br.com.dsgames.dtos.GameMinDTO;
 import br.com.dsgames.entities.Game;
-import br.com.dsgames.entities.GameList;
-import br.com.dsgames.projections.GameListProjection;
+import br.com.dsgames.projections.GameMinProjection;
 import br.com.dsgames.repositories.GameRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +18,9 @@ public class GameService {
     private GameRepository repository;
 
     @Transactional(readOnly = true) // Vai permitir que as operações obedesão o modelo ACID
-    public List<GameListDTO> findAllGames(){
+    public List<GameMinDTO> findAllGames(){
         List<Game> games = repository.findAll();
-        return  games.stream().map(GameListDTO::new).toList();
+        return  games.stream().map(GameMinDTO::new).toList();
 
     }
 
@@ -34,10 +32,10 @@ public class GameService {
     }
 
     @Transactional(readOnly = true)
-    public List<GameListDTO> findByList(Long id){
-        List<GameListProjection> result = repository.searchByList(id);
+    public List<GameMinDTO> findByList(Long listId){
+        List<GameMinProjection> result = repository.searchByList(listId);
         System.out.println(result);
-        return result.stream().map(GameListDTO::new).toList();
+        return result.stream().map(GameMinDTO::new).toList();
     }
 
 

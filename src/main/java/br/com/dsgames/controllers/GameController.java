@@ -1,7 +1,7 @@
 package br.com.dsgames.controllers;
 
 import br.com.dsgames.dtos.GameDTO;
-import br.com.dsgames.dtos.GameListDTO;
+import br.com.dsgames.dtos.GameMinDTO;
 import br.com.dsgames.services.GameService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +16,9 @@ public class GameController {
     @Autowired
     private GameService service;
     @GetMapping
-    public ResponseEntity<List<GameListDTO>> findAll(){
+    public ResponseEntity<List<GameMinDTO>> findAll(){
 
-        List<GameListDTO> dto = service.findAllGames();
+        List<GameMinDTO> dto = service.findAllGames();
         return ResponseEntity.ok().body(dto);
     }
 
