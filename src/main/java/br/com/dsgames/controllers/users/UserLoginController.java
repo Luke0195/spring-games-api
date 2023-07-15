@@ -9,6 +9,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping
@@ -25,10 +26,19 @@ public class UserLoginController {
     }
 
 
+    @PostMapping(value="/login")
+    public ResponseEntity<String>  authentication(@RequestBody String login){
+        UserLoginDTO userLogin = service.login(login);
+        return ResponseEntity.ok().body(userLogin.getId().toString());
+
+    }
+
     @GetMapping(value = "/users")
     public ResponseEntity<List<UserLoginDTO>> findAll(){
         List<UserLoginDTO> loginList = service.findAll();
         return ResponseEntity.ok(loginList);
     }
+
+
 
 }

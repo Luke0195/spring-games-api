@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserLoginService {
@@ -27,6 +29,17 @@ public class UserLoginService {
     public List<UserLoginDTO> findAll(){
       List<UserLogin> list = repository.findAll();
       return list.stream().map(x -> new UserLoginDTO(x)).toList();
+    }
+
+    public UserLoginDTO login(String login) {
+        try {
+
+            UserLogin userLogin = repository.findByLogin(login);
+            return new UserLoginDTO(userLogin);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+    return null;
     }
 
     private static void parsedDTOtoEntity(UserLoginDTO dto, UserLogin login){
