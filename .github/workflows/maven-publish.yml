@@ -44,5 +44,5 @@ jobs:
      needs: aws-autenticate
      steps:
      - name: Deploy Docker to AWS (EC2)
-       run: echo "Deploy to EC2)
+       run: echo "Deploy to EC2"
  
