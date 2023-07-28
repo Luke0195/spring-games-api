@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -32,3 +31,18 @@ jobs:
 
     - name: build
       run: mvn install
+      
+  aws-autenticate: 
+     needs: build
+     runs-on: ubuntu-latest
+     steps:
+       - name: Amazon ECR "Login" Action for GitHub Actions
+         run: echo "Autenticando com as crendicias da aws",
+   
+  deploy-docker-image: 
+     runs-on: ubuntu-latest
+     needs: aws-autenticate
+     steps:
+     - name: Deploy Docker to AWS (EC2)
+       run: echo "Deploy to EC2)
+ 
