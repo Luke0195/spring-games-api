@@ -39,7 +39,7 @@ jobs:
        - name: Amazon ECR "Login" Action for GitHub Actions
          run: echo "Autenticando com as crendicias da aws",
    
-  deploy-docker-image: 
+  deploy_to_EBS : 
      runs-on: ubuntu-latest
      needs: aws-autenticate
      steps:
